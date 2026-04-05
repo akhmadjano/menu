@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TORT HOUSE</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  min-height:100vh;
+  background:#FDF4EF;
+}
+
+/* ===== SPLASH ===== */
+#splashScreen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(160deg,#FDF4EF 0%,#F7EBE3 50%,#F5D5DE 100%);
+  overflow:hidden;
+}
+
+#splashScreen::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(107,15,43,0.05) 1px,transparent 0);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+
+#splashScreen::after{
+  content:'';
+  position:absolute;
+  top:-80px;right:-80px;
+  width:300px;height:300px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(196,99,122,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.splash-petal-bl{
+  position:absolute;
+  bottom:-70px;left:-70px;
+  width:220px;height:220px;
+  border-radius:50%;
+  background:rgba(196,99,122,0.1);
+  pointer-events:none;
+}
+
+.splash-card{
+  position:relative;
+  background:rgba(255,253,251,0.93);
+  border:1px solid rgba(196,99,122,0.2);
+  border-radius:28px;
+  padding:40px 32px 36px;
+  width:min(360px,92vw);
+  text-align:center;
+  box-shadow:0 20px 60px rgba(107,15,43,0.14),0 4px 16px rgba(107,15,43,0.08);
+  backdrop-filter:blur(8px);
+  animation:cardIn .6s cubic-bezier(.22,.7,.36,1) both;
+  z-index:1;
+}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(32px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* LOGO */
+.logo-ring{
+  position:relative;
+  width:100px;height:100px;
+  margin:0 auto 18px;
+  animation:cardIn .7s .1s cubic-bezier(.22,.7,.36,1) both;
+}
+
+.logo-ring-outer{
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:1.5px solid rgba(107,15,43,0.15);
+  animation:spinSlow 12s linear infinite;
+}
+
+.logo-ring-outer::before,.logo-ring-outer::after{
+  content:'';
+  position:absolute;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:rgba(196,99,122,0.5);
+  top:50%;left:-3px;
+  transform:translateY(-50%);
+}
+.logo-ring-outer::after{left:auto;right:-3px}
+
+@keyframes spinSlow{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+.logo-circle{
+  width:100%;height:100%;
+  border-radius:50%;
+  background:linear-gradient(145deg,#8B1a38,#6B0F2B);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 28px rgba(107,15,43,0.35),inset 0 1px 0 rgba(255,255,255,0.12);
+  overflow:hidden;
+}
+
+.logo-circle img{
+  width:65%;height:65%;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2)) brightness(0) invert(1);
+}
+
+/* fallback SVG kek agar rasm bo'lmasa */
+.logo-circle svg{
+  width:60px;height:60px;
+}
+
+/* BRAND */
+.brand-tagline{
+  font-size:.72rem;
+  color:#C4A08C;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:400;
+  margin-bottom:5px;
+  animation:cardIn .7s .18s cubic-bezier(.22,.7,.36,1) both;
+}
+
+.brand-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;
+  font-weight:400;
+  color:#2A1510;
+  letter-spacing:.1em;
+  line-height:1;
+  margin-bottom:4px;
+  animation:cardIn .7s .2s cubic-bezier(.22,.7,.36,1) both;
+}
+
+.brand-name span{
+  font-style:italic;
+  color:#6B0F2B;
+  font-weight:600;
+}
+
+.brand-greeting{
+  font-size:.82rem;
+  color:#7A5048;
+  line-height:1.55;
+  margin:12px 0 24px;
+  animation:cardIn .7s .24s cubic-bezier(.22,.7,.36,1) both;
+}
+
+/* DIVIDER */
+.divider{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;
+  animation:cardIn .7s .27s cubic-bezier(.22,.7,.36,1) both;
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;
+}
+.divider::before{background:linear-gradient(90deg,transparent,rgba(196,99,122,0.3))}
+.divider::after{background:linear-gradient(90deg,rgba(196,99,122,0.3),transparent)}
+.divider-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:rgba(196,99,122,0.5);
+}
+
+/* BUTTONS */
+.btn-group{
+  display:flex;flex-direction:column;gap:10px;
+}
+
+.splash-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 20px;
+  border-radius:50px;
+  font-family:'DM Sans',sans-serif;
+  font-size:.88rem;font-weight:500;
+  letter-spacing:.04em;
+  cursor:pointer;border:none;
+  transition:all .22s cubic-bezier(.4,0,.2,1);
+  text-decoration:none;width:100%;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#8B1a38,#6B0F2B);
+  color:#fff;
+  box-shadow:0 4px 18px rgba(107,15,43,0.32);
+  animation:cardIn .7s .32s cubic-bezier(.22,.7,.36,1) both;
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(107,15,43,0.45);
+}
+.btn-primary:active{transform:scale(.97)}
+
+.btn-secondary{
+  background:rgba(107,15,43,0.07);
+  color:#6B0F2B;
+  border:1.5px solid rgba(107,15,43,0.18);
+  animation:cardIn .7s .38s cubic-bezier(.22,.7,.36,1) both;
+}
+.btn-secondary:hover{
+  background:rgba(107,15,43,0.12);
+  transform:translateY(-2px);
+}
+
+.btn-outline{
+  background:transparent;
+  color:#8C6450;
+  border:1.5px solid rgba(196,160,140,0.4);
+  animation:cardIn .7s .44s cubic-bezier(.22,.7,.36,1) both;
+}
+.btn-outline:hover{
+  background:rgba(232,213,196,0.3);
+  transform:translateY(-2px);
+}
+
+.btn-icon{
+  width:20px;height:20px;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* FOOTER NOTE */
+.footer-note{
+  margin-top:20px;
+  font-size:.68rem;
+  color:#C4A08C;
+  letter-spacing:.07em;
+  animation:cardIn .7s .5s cubic-bezier(.22,.7,.36,1) both;
+}
+
+/* SPLASH HIDE */
+#splashScreen.hiding{
+  animation:splashOut .45s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes splashOut{
+  from{opacity:1;transform:scale(1)}
+  to{opacity:0;transform:scale(1.04)}
+}
+/* LOGO */
+.hero-logo{
+  position:relative;
+  width:100px;
+  height:100px;
+  margin:0 auto 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.1);
+  border:2px solid rgba(255,220,210,0.3);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 8px rgba(255,255,255,0.04),
+    0 12px 40px rgba(0,0,0,0.3);
+  animation:pulse-ring 3s ease-in-out infinite;
+  overflow:hidden;
+}
+/* Nur taralish effekti */
+.hero-logo::before{
+  content:'';
+  position:absolute;
+  inset:-60px;
+  background:radial-gradient(circle, rgba(255,200,180,0.35) 0%, rgba(196,99,122,0.18) 40%, transparent 70%);
+  border-radius:50%;
+  pointer-events:none;
+  animation:glow-pulse 3s ease-in-out infinite;
+  z-index:-1;
+}
+.hero-logo::after{
+  content:'';
+  position:absolute;
+  inset:-30px;
+  background:radial-gradient(circle, rgba(255,230,210,0.2) 0%, transparent 65%);
+  border-radius:50%;
+  pointer-events:none;
+  animation:glow-pulse 3s ease-in-out infinite reverse;
+  z-index:-1;
+}
+@keyframes glow-pulse{
+  0%,100%{opacity:0.7;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.12)}
+}
+.hero-logo img{
+  width:70%;
+  height:70%;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,0.25));
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="splashScreen">
+  <div class="splash-petal-bl"></div>
+
+  <div class="splash-card">
+
+    <!-- LOGO -->
+    <div class="logo-ring">
+  <div class="logo-ring-outer"></div>
+
+  <div class="logo-circle">
+    <img src="logo.svg" alt="Tort House Logo">
+  </div>
+</div>
+
+    <div class="brand-tagline">✦ Chortoq ✦</div>
+    <div class="brand-name">TORT <span>HOUSE</span></div>
+    <div class="brand-greeting">Xush kelibsiz! Bu yerda siz uchun<br>kerakli hamma narsani topasiz 🎂</div>
+
+    <div class="divider">
+      <div class="divider-dot"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-dot"></div>
+    </div>
+
+    <div class="btn-group">
+
+      <!-- 1. MENYU -->
+      <a class="splash-btn btn-primary" href="#" id="btnMenu">
+        <div class="btn-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+            <rect x="3" y="5" width="16" height="2" rx="1" fill="white"/>
+            <rect x="3" y="10" width="16" height="2" rx="1" fill="white"/>
+            <rect x="3" y="15" width="10" height="2" rx="1" fill="white"/>
+          </svg>
+        </div>
+        Menyu
+      </a>
+
+      <!-- 2. TELEGRAM -->
+      <a class="splash-btn btn-secondary" href="https://t.me/tort_real" target="_blank" id="btnTelegram">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+            <path d="M21.8 2.5L1.5 10.2c-1.3.5-1.3 1.3-.2 1.6l5.2 1.6 2 6.2c.3.8.6.9 1 .5l2.8-2.7 5.5 4c.5.3.9.1 1.1-.5L22 3.4c.3-.9-.3-1.3-.2-.9z" fill="#6B0F2B"/>
+            <path d="M6.5 11.8l10-6.1c.5-.3 1 0 .6.4L9 14.2l-.3 3.4L6.5 11.8z" fill="#8B1a38" opacity="0.4"/>
+          </svg>
+        </div>
+        Telegram kanal
+      </a>
+
+      <!-- 3. INSTAGRAM -->
+      <a class="splash-btn btn-outline" href="https://www.instagram.com/tort_house_uz/" target="_blank" id="btnInsta">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+            <rect x="2" y="2" width="20" height="20" rx="6" stroke="#8C6450" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.5" stroke="#8C6450" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="#8C6450"/>
+          </svg>
+        </div>
+        Instagram
+      </a>
+
+    </div>
+
+    <div class="footer-note">📍 Namangan, Chortoq &nbsp;·&nbsp; ⏰ 09:00 – 21:00</div>
+
+  </div>
+</div>
+<!-- ===== /SPLASH ===== -->
+
+
+<!-- ASOSIY KONTENT (sizning saytingiz shu yerda bo'ladi) -->
+<div id="mainContent" style="display:none">
+  <!-- Bu yerga sizning tort house menyu saytingiz kodini qo'ying -->
+</div>
+
+
+<script>
+// Splash faqat birinchi marta ko'rsatiladi (har bir session)
+(function(){
+  var splash = document.getElementById('splashScreen');
+  var main   = document.getElementById('mainContent');
+
+  // Menyu tugmasi: menu.html sahifasini ochadi
+document.getElementById('btnMenu').addEventListener('click', function(e){
+  e.preventDefault();
+  window.location.href = "menu.html";
+});
+
+  function hideSplash(){
+    splash.classList.add('hiding');
+    setTimeout(function(){
+      splash.style.display = 'none';
+      main.style.display   = 'block';
+    }, 450);
+  }
+
+  // Splash ko'rsatish (har doim birinchi kirganda)
+  // Agar faqat SESSION da bir marta ko'rsatmoqchi bo'lsangiz:
+  // if(sessionStorage.getItem('splashDone')){ hideSplash(); return; }
+  // sessionStorage.setItem('splashDone','1');
+})();
+</script>
+
+</body>
+</html>
