@@ -8,11 +8,11 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 
 const pool = new Pool({
-  host: 'junction.proxy.rlwy.net',
-  port: 11316,
+  host: 'maglev.proxy.rlwy.net',
+  port: 13464,
   database: 'railway',
   user: 'postgres',
-  password: 'tMaaqhhFCEtLHevBGlxoVenTMxKkfuZg',
+  password: 'CPGwvFKGmLIYwqqZmeQnANmHeAgaCnts',
   ssl: {
     rejectUnauthorized: false
   }
